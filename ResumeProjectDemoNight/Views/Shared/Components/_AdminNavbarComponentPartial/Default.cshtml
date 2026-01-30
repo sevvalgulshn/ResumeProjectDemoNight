@@ -1,0 +1,53 @@
+﻿@model (int totalProjects, int unreadMessages)
+
+<header class="h-16 border-b border-slate-800 bg-background-dark flex items-center justify-between px-8">
+    <h2 class="text-white text-lg font-bold">Dashboard</h2>
+
+    <div class="flex items-center gap-6">
+
+        <!-- PORTFOLIO -->
+        <a href="/Portfolio/PortfolioList" class="relative">
+            <span class="material-symbols-outlined text-slate-300">layers</span>
+            <span class="absolute -top-1 -right-2 bg-teal-500 text-black text-xs px-1 rounded-full">
+                @Model.totalProjects
+            </span>
+        </a>
+
+        <!-- SKILL -->
+        <a href="/Skill/SkillList" class="relative">
+            <span class="material-symbols-outlined text-slate-300">bar_chart</span>
+        </a>
+
+        <!-- MESSAGE -->
+        <a href="/Message/MessageList" class="relative">
+            <span class="material-symbols-outlined text-slate-300">mail</span>
+            @if (Model.unreadMessages > 0)
+            {
+                <span class="absolute -top-1 -right-2 bg-red-500 text-white text-xs px-1 rounded-full">
+                    @Model.unreadMessages
+                </span>
+            }
+        </a>
+        <!-- About -->
+        <a href="/About/AboutList" class="relative">
+            <span class="material-symbols-outlined text-slate-300">person</span>
+        </a>
+
+        <!-- Education -->
+        <a href="/Education/EducationList" class="relative">
+            <span class="material-symbols-outlined text-slate-300">school</span>
+        </a>
+        <!-- Social Media -->
+        <a href="/SocialMedia/SocialMediaList" class="relative">
+            <span class="material-symbols-outlined text-slate-300">share</span>
+        </a>
+
+
+
+        <!-- ADMIN INFO -->
+        <div class="text-right">
+            <p class="text-white text-sm font-bold">Admin</p>
+            <p class="text-slate-500 text-xs">Portfolio Manager</p>
+        </div>
+    </div>
+</header>

@@ -1,0 +1,95 @@
+﻿@model List<ResumeProjectDemoNight.Entities.Education>
+@{
+    ViewData["Title"] = "Eğitimler";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="p-8">
+    <div class="max-w-7xl mx-auto space-y-6">
+
+        <!-- Header -->
+        <div class="flex items-center justify-between">
+            <div>
+                <h2 class="text-2xl font-bold text-white">Eğitimler</h2>
+                <p class="text-slate-400 text-sm">Eğitim bilgilerini buradan yönetebilirsin.</p>
+            </div>
+
+            <a href="/Education/CreateEducation"
+               class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-white font-semibold hover:opacity-90 transition">
+                <span class="material-symbols-outlined" style="font-size:20px;color:white;">add</span>
+                Yeni Eğitim Ekle
+            </a>
+        </div>
+
+        <!-- Table Card -->
+        <div class="bg-card-dark border border-slate-800 rounded-xl overflow-hidden shadow-xl">
+            <div class="p-5 border-b border-slate-800 flex items-center gap-3">
+                <span class="material-symbols-outlined text-primary" style="font-size:22px;">school</span>
+                <div>
+                    <h3 class="text-white font-bold">Eğitim Listesi</h3>
+                    <p class="text-slate-500 text-xs">Toplam: @(Model?.Count ?? 0)</p>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm">
+                    <thead class="bg-slate-900/60 border-b border-slate-800">
+                        <tr class="text-left">
+                            <th class="px-6 py-4 text-slate-300 font-semibold w-20">ID</th>
+                            <th class="px-6 py-4 text-slate-300 font-semibold">Okul</th>
+                            <th class="px-6 py-4 text-slate-300 font-semibold">Bölüm</th>
+                            <th class="px-6 py-4 text-slate-300 font-semibold">Tarih</th>
+                            <th class="px-6 py-4 text-slate-300 font-semibold text-right w-44">İşlemler</th>
+                        </tr>
+                    </thead>
+
+                    <tbody class="divide-y divide-slate-800">
+                        @if (Model == null || Model.Count == 0)
+                        {
+                            <tr>
+                                <td colspan="5" class="px-6 py-10 text-center text-slate-500">
+                                    Henüz eğitim bilgisi eklenmemiş.
+                                </td>
+                            </tr>
+                        }
+                        else
+                        {
+                            foreach (var item in Model)
+                            {
+                                <tr class="hover:bg-slate-900/40 transition">
+                                    <td class="px-6 py-4 text-slate-400">@item.EducationId</td>
+
+                                    <td class="px-6 py-4">
+                                        <div class="text-white font-semibold">@item.SchoolName</div>
+                                    </td>
+
+                                    <td class="px-6 py-4 text-slate-300">@item.Department</td>
+
+                                    <td class="px-6 py-4 text-slate-300">@item.Date</td>
+
+                                    <td class="px-6 py-4">
+                                        <div class="flex justify-end gap-2">
+                                            <a href="/Education/UpdateEducation/@item.EducationId"
+                                               class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 text-white hover:border-primary/60 hover:bg-slate-800/80 transition">
+                                                <span class="material-symbols-outlined" style="font-size:18px;color:white;">edit</span>
+                                                Güncelle
+                                            </a>
+
+                                            <a href="/Education/DeleteEducation/@item.EducationId"
+                                               onclick="return confirm('Silmek istediğine emin misin?');"
+                                               class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-red-500/10 border border-red-500/30 text-red-300 hover:bg-red-500/20 transition">
+                                                <span class="material-symbols-outlined" style="font-size:18px;color:inherit;">delete</span>
+                                                Sil
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,98 +1,59 @@
-﻿
+﻿@model List<ResumeProjectDemoNight.Entities.Experience>
+
+@functions {
+    private int GetYearFromPeriod(string? period)
+    {
+        if (string.IsNullOrWhiteSpace(period))
+            return 0;
+
+        var digits = new string(period.Where(char.IsDigit).ToArray()); // "20242025"
+
+        if (digits.Length >= 4 && int.TryParse(digits.Substring(digits.Length - 4), out int year))
+            return year;
+
+        return 0;
+    }
+}
+
 <section id="experience">
+    <div class="container">
 
-	<div class="container">
+        <h2 class="section-title wow fadeInUp">Deneyimlerim</h2>
+        <div class="spacer" data-height="60"></div>
 
-		<!-- section title -->
-		<h2 class="section-title wow fadeInUp">Deneyimlerim</h2>
+        <div class="row">
 
-		<div class="spacer" data-height="60"></div>
+            <!-- SOL: DB'den Deneyimler -->
+            <div class="col-md-6">
+                <div class="timeline exp bg-white rounded shadow-dark padding-30 overflow-hidden">
 
-		<div class="row">
+                    @foreach (var item in Model
+                                        .OrderByDescending(x => GetYearFromPeriod(x.WorkPeriodDate))
+                                        .ThenByDescending(x => x.ExperienceId))
+                    {
+                        <div class="timeline-container wow fadeInUp">
+                            <div class="content">
+                                <span class="time">@item.WorkPeriodDate</span>
+                                <h3 class="title">@item.CompanyName</h3>
+                                <p>
+                                    <strong>@item.Title</strong> - @item.Description
+                                </p>
+                            </div>
+                        </div>
+                    }
 
-			<div class="col-md-6">
+                    <span class="line"></span>
+                </div>
+            </div>
 
-				<!-- timeline wrapper -->
-				<div class="timeline edu bg-white rounded shadow-dark padding-30 overflow-hidden">
+            <!-- SAĞ: Education (component) -->
+            <div class="col-md-6">
+                <div class="spacer d-md-none d-lg-none" data-height="30"></div>
 
-					<!-- timeline item -->
-					<div class="timeline-container wow fadeInUp">
-						<div class="content">
-							<span class="time">2019 - Present</span>
-							<h3 class="title">Academic Degree</h3>
-							<p>Lorem ipsum dolor sit amet quo ei simul congue exerci ad nec admodum perfecto.</p>
-						</div>
-					</div>
+                <!-- Component kendi içinde timeline edu üretiyor olmalı -->
+                @await Component.InvokeAsync("_DefaultEducationComponentPartial")
+            </div>
 
-					<!-- timeline item -->
-					<div class="timeline-container wow fadeInUp" data-wow-delay="0.2s">
-						<div class="content">
-							<span class="time">2017 - 2013</span>
-							<h3 class="title">Bachelor’s Degree</h3>
-							<p>Lorem ipsum dolor sit amet quo ei simul congue exerci ad nec admodum perfecto.</p>
-						</div>
-					</div>
-
-					<!-- timeline item -->
-					<div class="timeline-container wow fadeInUp" data-wow-delay="0.4s">
-						<div class="content">
-							<span class="time">2013 - 2009</span>
-							<h3 class="title">Honours Degree</h3>
-							<p>Lorem ipsum dolor sit amet quo ei simul congue exerci ad nec admodum perfecto.</p>
-						</div>
-					</div>
-
-					<!-- main line -->
-					<span class="line"></span>
-
-				</div>
-
-			</div>
-
-			<div class="col-md-6">
-
-				<!-- responsive spacer -->
-				<div class="spacer d-md-none d-lg-none" data-height="30"></div>
-
-				<!-- timeline wrapper -->
-				<div class="timeline exp bg-white rounded shadow-dark padding-30 overflow-hidden">
-
-					<!-- timeline item -->
-					<div class="timeline-container wow fadeInUp">
-						<div class="content">
-							<span class="time">2019 - Present</span>
-							<h3 class="title">Web Designer</h3>
-							<p>Lorem ipsum dolor sit amet quo ei simul congue exerci ad nec admodum perfecto.</p>
-						</div>
-					</div>
-
-					<!-- timeline item -->
-					<div class="timeline-container wow fadeInUp" data-wow-delay="0.2s">
-						<div class="content">
-							<span class="time">2017 - 2013</span>
-							<h3 class="title">Front-End Developer</h3>
-							<p>Lorem ipsum dolor sit amet quo ei simul congue exerci ad nec admodum perfecto.</p>
-						</div>
-					</div>
-
-					<!-- timeline item -->
-					<div class="timeline-container wow fadeInUp" data-wow-delay="0.4s">
-						<div class="content">
-							<span class="time">2013 - 2009</span>
-							<h3 class="title">Back-End Developer</h3>
-							<p>Lorem ipsum dolor sit amet quo ei simul congue exerci ad nec admodum perfecto.</p>
-						</div>
-					</div>
-
-					<!-- main line -->
-					<span class="line"></span>
-
-				</div>
-
-			</div>
-
-		</div>
-
-	</div>
-
+        </div>
+    </div>
 </section>

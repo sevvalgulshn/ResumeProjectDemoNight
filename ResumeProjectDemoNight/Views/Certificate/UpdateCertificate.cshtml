@@ -1,0 +1,133 @@
+﻿@model ResumeProjectDemoNight.Entities.Certificate
+@{
+    ViewData["Title"] = "UpdateCertificate";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="flex-1 overflow-y-auto p-8">
+    <div class="max-w-4xl mx-auto space-y-8">
+
+        <!-- Header -->
+        <div class="flex items-center justify-between">
+            <div>
+                <h3 class="text-2xl font-bold text-white">Sertifika Güncelle</h3>
+                <p class="text-slate-400 text-sm mt-1">Sertifika bilgilerini düzenleyin ve güncelleyin</p>
+            </div>
+
+            <a href="/Certificate/CertificateList/"
+               class="flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-white px-5 py-2.5 rounded-lg font-bold text-sm transition-all">
+                <span class="material-symbols-outlined" style="color:white;font-size:20px;">arrow_back</span>
+                Listeye Dön
+            </a>
+        </div>
+
+        <!-- Form Card -->
+        <div class="bg-card-dark rounded-xl border border-slate-800 overflow-hidden shadow-2xl">
+            <form method="post" class="p-8 space-y-6">
+
+                <!-- Hidden ID -->
+                <input type="hidden" asp-for="CertificateId" />
+
+                <!-- Title -->
+                <div class="space-y-2">
+                    <label class="block text-sm font-semibold text-slate-300">
+                        Sertifika Başlığı <span class="text-red-400">*</span>
+                    </label>
+                    <input asp-for="Title"
+                           class="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                           placeholder="Örn: AWS Certified Solutions Architect"
+                           required />
+                </div>
+
+                <!-- Organization -->
+                <div class="space-y-2">
+                    <label class="block text-sm font-semibold text-slate-300">
+                        Kuruluş / Organizasyon
+                    </label>
+                    <input asp-for="Organization"
+                           class="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                           placeholder="Örn: Amazon Web Services" />
+                </div>
+
+                <!-- Date -->
+                <div class="space-y-2">
+                    <label class="block text-sm font-semibold text-slate-300">
+                        Sertifika Tarihi <span class="text-red-400">*</span>
+                    </label>
+                    <input asp-for="Date"
+                           class="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                           placeholder="Örn: 2026 - Devam"
+                           required />
+                </div>
+
+                <!-- Description -->
+                <div class="space-y-2">
+                    <label class="block text-sm font-semibold text-slate-300">
+                        Açıklama <span class="text-slate-500 text-xs font-normal ml-1">- Opsiyonel</span>
+                    </label>
+                    <textarea asp-for="Description"
+                              rows="4"
+                              class="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none"
+                              placeholder="Sertifika hakkında ek bilgiler..."></textarea>
+                </div>
+
+                <!-- IsOngoing + Status -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                    <!-- IsOngoing -->
+                    <label class="flex items-center gap-3 px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg cursor-pointer hover:border-primary transition-all">
+                        <input asp-for="IsOngoing" type="checkbox" class="w-4 h-4" />
+                        <span class="text-white font-medium">Devam ediyor</span>
+                    </label>
+
+                    <!-- Status -->
+                    <div class="space-y-2">
+                        <label class="block text-sm font-semibold text-slate-300">
+                            Durum <span class="text-red-400">*</span>
+                        </label>
+
+                        <div class="flex gap-3">
+                            <label class="flex items-center gap-2 px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg cursor-pointer hover:border-primary transition-all">
+                                <input type="radio" name="Status" value="true" @(Model.Status ? "checked" : "") class="w-4 h-4" />
+                                <span class="text-white font-medium">Aktif</span>
+                            </label>
+
+                            <label class="flex items-center gap-2 px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg cursor-pointer hover:border-primary transition-all">
+                                <input type="radio" name="Status" value="false" @(!Model.Status ? "checked" : "") class="w-4 h-4" />
+                                <span class="text-white font-medium">Pasif</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Buttons -->
+                <div class="flex items-center gap-4 pt-4 border-t border-slate-800">
+                    <button type="submit"
+                            class="flex items-center gap-2 bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-lg font-bold text-sm transition-all shadow-lg shadow-primary/20">
+                        <span class="material-symbols-outlined" style="color:white;font-size:20px;">update</span>
+                        Değişiklikleri Kaydet
+                    </button>
+
+                    <a href="/Certificate/CertificateList/"
+                       class="flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-white px-6 py-3 rounded-lg font-bold text-sm transition-all">
+                        <span class="material-symbols-outlined" style="color:white;font-size:20px;">cancel</span>
+                        İptal
+                    </a>
+                </div>
+
+            </form>
+        </div>
+
+        <!-- Warning -->
+        <div class="bg-amber-500/10 border border-amber-500/30 rounded-xl p-6">
+            <div class="flex gap-4">
+                <span class="material-symbols-outlined text-amber-400" style="font-size: 24px;">warning</span>
+                <div class="space-y-1">
+                    <h4 class="text-sm font-semibold text-amber-400">Dikkat</h4>
+                    <p class="text-sm text-slate-300">Değişiklikler kalıcıdır. Kaydetmeden önce kontrol edin.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

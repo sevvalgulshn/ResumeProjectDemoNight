@@ -1,4 +1,9 @@
-﻿namespace ResumeProjectDemoNight.Entities
+﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.Data.SqlClient;
+using Newtonsoft.Json.Linq;
+using System.Net.Sockets;
+
+namespace ResumeProjectDemoNight.Entities
 {
     public class Message
     {
@@ -8,6 +13,10 @@
         public string Subject { get; set; }
         public string MessageDetail { get; set; }
         public bool IsRead { get; set; }
-        public DateTime SendDate { get; set; }
+        public DateTime SendDate { get; set; } //mesajın gönderilme tarihi
     }
 }
+
+
+
+             

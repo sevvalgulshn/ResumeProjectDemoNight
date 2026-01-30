@@ -1,0 +1,24 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using ResumeProjectDemoNight.Context;
+
+namespace ResumeProjectDemoNight.ViewComponents.DefaultViewComponents
+{
+    public class _DefaultSkillComponentPartial : ViewComponent
+    {
+        private readonly ResumeContext _context;
+
+        public _DefaultSkillComponentPartial(ResumeContext context)
+        {
+            _context = context;
+        }
+
+        public IViewComponentResult Invoke()
+        {
+            var values = _context.Skills
+                .Where(x => x.Status == true)
+                .ToList();
+
+            return View(values);
+        }
+    }
+}

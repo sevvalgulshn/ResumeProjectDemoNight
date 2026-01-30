@@ -1,0 +1,117 @@
+﻿@model List<ResumeProjectDemoNight.Entities.Skill>
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Yetenekler";
+}
+
+<div class="p-8">
+    <div class="max-w-7xl mx-auto space-y-6">
+
+        <!-- Header -->
+        <div class="flex items-center justify-between">
+            <div>
+                <h1 class="text-2xl font-bold text-white">Yetenekler</h1>
+                <p class="text-slate-400 text-sm">Yetenek listenizi yönetin</p>
+            </div>
+
+            <a href="/Skill/CreateSkill"
+               class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-white font-semibold hover:opacity-90 transition">
+                <span class="material-symbols-outlined" style="font-size:20px; color:white;">add</span>
+                Yeni Yetenek
+            </a>
+        </div>
+
+        <!-- Table Card -->
+        <div class="bg-card-dark rounded-xl border border-slate-800 overflow-hidden shadow-xl">
+            <div class="p-5 border-b border-slate-800 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <span class="material-symbols-outlined text-primary" style="font-size:24px;">code</span>
+                    <div>
+                        <h3 class="text-white font-bold">Skill Listesi</h3>
+                        <p class="text-slate-500 text-xs">@Model.Count adet kayıt</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm">
+                    <thead class="bg-slate-900/40 text-slate-300">
+                        <tr class="text-left">
+                            <th class="px-5 py-3 w-20">ID</th>
+                            <th class="px-5 py-3 min-w-[260px]">Başlık</th>
+                            <th class="px-5 py-3 w-28">Değer</th>
+                            <th class="px-5 py-3 w-28">Durum</th>
+                            <th class="px-5 py-3 w-56 text-right">İşlemler</th>
+                        </tr>
+                    </thead>
+
+                    <tbody class="divide-y divide-slate-800">
+                        @foreach (var item in Model)
+                        {
+                            <tr class="hover:bg-slate-900/30 transition">
+                                <td class="px-5 py-4 text-slate-300">@item.SkillId</td>
+
+                                <td class="px-5 py-4">
+                                    <p class="text-white font-semibold leading-snug">
+                                        @item.Title
+                                    </p>
+                                </td>
+
+                                <td class="px-5 py-4">
+                                    <span class="inline-flex items-center px-2.5 py-1 rounded-full bg-slate-900/60 border border-slate-700 text-white font-bold">
+                                        @item.Value
+                                    </span>
+                                </td>
+
+                                <td class="px-5 py-4">
+                                    @if (item.Status)
+                                    {
+                                        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-xs font-bold">
+                                            <span class="material-symbols-outlined" style="font-size:16px;">check_circle</span>
+                                            Aktif
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-slate-500/15 border border-slate-500/30 text-slate-300 text-xs font-bold">
+                                            <span class="material-symbols-outlined" style="font-size:16px;">do_not_disturb_on</span>
+                                            Pasif
+                                        </span>
+                                    }
+                                </td>
+
+                                <td class="px-5 py-4">
+                                    <div class="flex justify-end gap-2">
+
+                                        <a href="/Skill/UpdateSkill/@item.SkillId"
+                                           class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-amber-500/15 border border-amber-500/30 text-amber-300 hover:bg-amber-500/25 transition">
+                                            <span class="material-symbols-outlined" style="font-size:18px;">edit</span>
+                                            Güncelle
+                                        </a>
+
+                                        <a href="/Skill/DeleteSkill/@item.SkillId"
+                                           onclick="return confirm('Silmek istediğine emin misin?');"
+                                           class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-red-500/15 border border-red-500/30 text-red-300 hover:bg-red-500/25 transition">
+                                            <span class="material-symbols-outlined" style="font-size:18px;">delete</span>
+                                            Sil
+                                        </a>
+
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            @if (Model == null || !Model.Any())
+            {
+                <div class="p-6 text-center text-slate-400">
+                    Henüz yetenek eklenmemiş.
+                </div>
+            }
+        </div>
+
+    </div>
+</div>

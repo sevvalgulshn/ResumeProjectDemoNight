@@ -1,0 +1,23 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using ResumeProjectDemoNight.Context;
+
+namespace ResumeProjectDemoNight.ViewComponents.DefaultViewComponents
+{
+    public class _DefaultCertificateComponentPartial : ViewComponent
+    {
+        private readonly ResumeContext _context;
+        public _DefaultCertificateComponentPartial(ResumeContext context)
+        {
+            _context = context;
+        }
+
+        public IViewComponentResult Invoke()
+        {
+            var values = _context.Certificates
+                .Where(x => x.Status == true)
+                .ToList();
+
+            return View(values);
+        }
+    }
+}

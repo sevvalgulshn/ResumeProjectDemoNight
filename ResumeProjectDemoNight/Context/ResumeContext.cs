@@ -5,9 +5,9 @@ namespace ResumeProjectDemoNight.Context
 {
     public class ResumeContext : DbContext
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public ResumeContext(DbContextOptions<ResumeContext> options)
+            : base(options)
         {
-            optionsBuilder.UseSqlServer("Server=DESKTOP-R7AR1ND;initial catalog=Project1NightResumeDb;integrated security=true;trust server certificate=true");
         }
 
         public DbSet<About> Abouts { get; set; }
@@ -17,7 +17,10 @@ namespace ResumeProjectDemoNight.Context
         public DbSet<Portfolio> Portfolios { get; set; }
         public DbSet<Service> Services { get; set; }
         public DbSet<Testimonial> Testimonials { get; set; }
-
+        public DbSet<Education> Educations { get; set; }
+        public DbSet<Skill> Skills { get; set; }
+        public DbSet<SocialMedia> SocialMedias { get; set; }
+        public DbSet<Certificate> Certificates { get; set; }
+        public DbSet<Statistic> Statistics { get; set; }
     }
 }
-//Scope-->Kapsam

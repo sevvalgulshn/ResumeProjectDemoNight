@@ -1,0 +1,246 @@
+﻿
+
+@model ResumeProjectDemoNight.Entities.About
+@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+    <!-- Welcome -->
+    <div class="bg-slate-900/40 border border-slate-800 rounded-xl p-4">
+        <p class="text-slate-300">
+            Hoş geldin, <span class="text-white font-semibold">@ViewBag.AdminName</span> 👋
+        </p>
+    </div>
+
+
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+
+            <!-- Proje -->
+            <div class="bg-gradient-to-br from-blue-500/10 to-blue-600/5 border border-blue-500/20 rounded-xl p-6 hover:shadow-xl hover:shadow-blue-500/10 transition-all group">
+                <div class="flex items-start justify-between mb-4">
+                    <div class="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center group-hover:bg-blue-500/30 transition-all">
+                        <span class="material-symbols-outlined text-blue-400" style="font-size:28px;">work</span>
+                    </div>
+                    <span class="text-blue-400 text-xs font-bold bg-blue-500/20 px-2 py-1 rounded">
+                        +@ViewBag.ActiveProjects Aktif
+                    </span>
+                </div>
+                <h4 class="text-3xl font-bold text-white mb-1">@ViewBag.TotalProjects</h4>
+                <p class="text-blue-400 text-sm font-semibold">Toplam Proje</p>
+                <a href="/Portfolio/PortfolioList" class="text-slate-400 text-xs mt-3 inline-block hover:text-white">Projeleri görüntüle →</a>
+            </div>
+
+            <!-- Yetenek -->
+            <div class="bg-gradient-to-br from-emerald-500/10 to-emerald-600/5 border border-emerald-500/20 rounded-xl p-6 hover:shadow-xl hover:shadow-emerald-500/10 transition-all group">
+                <div class="flex items-start justify-between mb-4">
+                    <div class="w-12 h-12 bg-emerald-500/20 rounded-lg flex items-center justify-center group-hover:bg-emerald-500/30 transition-all">
+                        <span class="material-symbols-outlined text-emerald-400" style="font-size:28px;">psychology</span>
+                    </div>
+                </div>
+                <h4 class="text-3xl font-bold text-white mb-1">@ViewBag.TotalSkills</h4>
+                <p class="text-emerald-400 text-sm font-semibold">Toplam Yetenek</p>
+                <a href="/Skill/Index" class="text-slate-400 text-xs mt-3 inline-block hover:text-white">Yetenekleri yönet →</a>
+            </div>
+
+            <!-- Mesaj -->
+            <div class="bg-gradient-to-br from-purple-500/10 to-purple-600/5 border border-purple-500/20 rounded-xl p-6 hover:shadow-xl hover:shadow-purple-500/10 transition-all group">
+                <div class="flex items-start justify-between mb-4">
+                    <div class="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center group-hover:bg-purple-500/30 transition-all">
+                        <span class="material-symbols-outlined text-purple-400" style="font-size:28px;">mail</span>
+                    </div>
+                    <span class="text-purple-400 text-xs font-bold bg-purple-500/20 px-2 py-1 rounded">
+                        @ViewBag.UnreadMessages Yeni
+                    </span>
+                </div>
+                <h4 class="text-3xl font-bold text-white mb-1">@ViewBag.TotalMessages</h4>
+                <p class="text-purple-400 text-sm font-semibold">Gelen Mesaj</p>
+                <a href="/Message/MessageList" class="text-slate-400 text-xs mt-3 inline-block hover:text-white">Mesajlara git →</a>
+            </div>
+
+            <!-- Sertifika -->
+            <div class="bg-gradient-to-br from-amber-500/10 to-amber-600/5 border border-amber-500/20 rounded-xl p-6 hover:shadow-xl hover:shadow-amber-500/10 transition-all group">
+                <div class="flex items-start justify-between mb-4">
+                    <div class="w-12 h-12 bg-amber-500/20 rounded-lg flex items-center justify-center group-hover:bg-amber-500/30 transition-all">
+                        <span class="material-symbols-outlined text-amber-400" style="font-size:28px;">workspace_premium</span>
+                    </div>
+                    <span class="text-amber-400 text-xs font-bold bg-amber-500/20 px-2 py-1 rounded">
+                        @ViewBag.ActiveCertificates Aktif
+                    </span>
+                </div>
+                <h4 class="text-3xl font-bold text-white mb-1">@ViewBag.TotalCertificates</h4>
+                <p class="text-amber-400 text-sm font-semibold">Sertifika / Eğitim</p>
+                <a href="/Certificate/CertificateList" class="text-slate-400 text-xs mt-3 inline-block hover:text-white">Sertifikalara git →</a>
+            </div>
+
+        </div>
+
+        <!-- About + Quick Actions -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+            <!-- About Summary (2 col) -->
+            <div class="lg:col-span-2 bg-card-dark rounded-xl border border-slate-800 overflow-hidden shadow-xl">
+                <div class="bg-gradient-to-r from-primary/20 to-transparent p-6 border-b border-slate-800">
+                    <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-primary" style="font-size:28px;">person</span>
+                        <div>
+                            <h4 class="text-lg font-bold text-white">Hakkımda Özeti</h4>
+                            <p class="text-slate-400 text-sm">Profil bilgileriniz</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-6">
+                    <div class="flex items-start gap-6">
+                        <div class="w-24 h-24 rounded-full overflow-hidden bg-slate-900 ring-4 ring-primary/30 flex-shrink-0">
+                            <img src="@(!string.IsNullOrWhiteSpace(Model?.ImageUrl) ? Model.ImageUrl : (string)ViewBag.ProfileImage)"
+                                 alt="profile"
+                                 class="w-full h-full object-cover" />
+
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-bold text-white mb-2">
+                                @(!string.IsNullOrWhiteSpace(Model?.NameSurname) ? Model.NameSurname : "Şevval Gül Şahin")
+                            </h3>
+
+
+                            <p class="text-slate-400 text-sm leading-relaxed"
+                               style="display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;">
+                                @(Model?.Description ?? "Hakkımda bilgisi henüz eklenmemiş.")
+                            </p>
+
+                            <a href="/About/AboutList" class="inline-flex items-center gap-2 text-primary hover:text-primary/80 text-sm font-semibold mt-3 transition-colors">
+                                <span>Düzenle</span>
+                                <span class="material-symbols-outlined" style="font-size:16px;">arrow_forward</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions (1 col) -->
+            <div class="bg-card-dark rounded-xl border border-slate-800 overflow-hidden shadow-xl">
+                <div class="bg-gradient-to-r from-slate-700 to-transparent p-6 border-b border-slate-800">
+                    <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-slate-300" style="font-size:28px;">bolt</span>
+                        <div>
+                            <h4 class="text-lg font-bold text-white">Hızlı İşlemler</h4>
+                            <p class="text-slate-400 text-sm">Sık kullanılanlar</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-6 space-y-3">
+                    <a href="/Portfolio/CreatePortfolio" class="flex items-center gap-3 p-3 bg-slate-900/50 hover:bg-slate-800 rounded-lg border border-slate-700 hover:border-primary/50 transition-all group">
+                        <div class="w-10 h-10 bg-primary/20 rounded-lg flex items-center justify-center group-hover:bg-primary/30 transition-all">
+                            <span class="material-symbols-outlined text-primary" style="font-size:20px;">add</span>
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-white font-semibold text-sm">Yeni Proje Ekle</p>
+                            <p class="text-slate-500 text-xs">Portfolyoya proje ekle</p>
+                        </div>
+                        <span class="material-symbols-outlined text-slate-600 group-hover:text-primary transition-colors" style="font-size:20px;">arrow_forward</span>
+                    </a>
+
+                    <a href="/Message/MessageList" class="flex items-center gap-3 p-3 bg-slate-900/50 hover:bg-slate-800 rounded-lg border border-slate-700 hover:border-primary/50 transition-all group">
+                        <div class="w-10 h-10 bg-purple-500/20 rounded-lg flex items-center justify-center group-hover:bg-purple-500/30 transition-all">
+                            <span class="material-symbols-outlined text-purple-400" style="font-size:20px;">mail</span>
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-white font-semibold text-sm">Mesajları Görüntüle</p>
+                            <p class="text-slate-500 text-xs">@ViewBag.UnreadMessages okunmamış</p>
+                        </div>
+                        <span class="material-symbols-outlined text-slate-600 group-hover:text-primary transition-colors" style="font-size:20px;">arrow_forward</span>
+                    </a>
+
+                    <a href="/Certificate/CertificateList" class="flex items-center gap-3 p-3 bg-slate-900/50 hover:bg-slate-800 rounded-lg border border-slate-700 hover:border-primary/50 transition-all group">
+                        <div class="w-10 h-10 bg-amber-500/20 rounded-lg flex items-center justify-center group-hover:bg-amber-500/30 transition-all">
+                            <span class="material-symbols-outlined text-amber-400" style="font-size:20px;">verified</span>
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-white font-semibold text-sm">Sertifika/Eğitim</p>
+                            <p class="text-slate-500 text-xs">Ekle / düzenle</p>
+                        </div>
+                        <span class="material-symbols-outlined text-slate-600 group-hover:text-primary transition-colors" style="font-size:20px;">arrow_forward</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- System Status (widgets) -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div class="bg-card-dark rounded-xl border border-slate-800 overflow-hidden shadow-xl">
+                <div class="p-6 border-b border-slate-800 flex items-center gap-3">
+                    <span class="material-symbols-outlined text-emerald-400" style="font-size:24px;">monitoring</span>
+                    <div>
+                        <h4 class="text-lg font-bold text-white">Sistem Durumu</h4>
+                        <p class="text-slate-500 text-xs">Veri sayımları</p>
+                    </div>
+                </div>
+
+                <div class="p-6 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <p class="text-slate-300">Deneyimler</p>
+                        <span class="text-white font-bold">@ViewBag.TotalExperiences</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <p class="text-slate-300">Eğitimler</p>
+                        <span class="text-white font-bold">@ViewBag.TotalEducations</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <p class="text-slate-300">Hizmetler</p>
+                        <span class="text-white font-bold">@ViewBag.TotalServices</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <p class="text-slate-300">Referanslar</p>
+                        <span class="text-white font-bold">@ViewBag.TotalTestimonials</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-card-dark rounded-xl border border-slate-800 overflow-hidden shadow-xl">
+                <div class="p-6 border-b border-slate-800 flex items-center gap-3">
+                    <span class="material-symbols-outlined text-primary" style="font-size:24px;">insights</span>
+                    <div>
+                        <h4 class="text-lg font-bold text-white">İstatistik Kartları</h4>
+                        <p class="text-slate-500 text-xs">DB’den gelen 4 kart</p>
+                    </div>
+                </div>
+
+@{
+    var stats = ViewBag.StatisticCards as List<ResumeProjectDemoNight.Entities.Statistic>
+                ?? new List<ResumeProjectDemoNight.Entities.Statistic>();
+
+    string MapIcon(string icon)
+    {
+        icon = (icon ?? "").ToLower();
+        if (icon.Contains("briefcase")) return "work";
+        if (icon.Contains("clock")) return "schedule";
+        if (icon.Contains("graduation")) return "school";
+        if (icon.Contains("users")) return "groups";
+        return "insights";
+    }
+}
+
+@foreach (var item in stats)
+{
+    <div class="p-4 rounded-lg border border-slate-800 bg-slate-900/40">
+        <div class="flex items-center justify-between mb-2">
+            <p class="text-slate-400 text-xs">@item.Title</p>
+            <span class="material-symbols-outlined text-slate-400" style="font-size:20px;">
+                @MapIcon(item.Icon)
+            </span>
+        </div>
+        <p class="text-white text-2xl font-bold">@item.Value</p>
+    </div>
+}
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

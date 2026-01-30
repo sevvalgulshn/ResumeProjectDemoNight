@@ -17,7 +17,7 @@ namespace ResumeProjectDemoNight.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.11")
+                .HasAnnotation("ProductVersion", "9.0.12")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -62,6 +62,64 @@ namespace ResumeProjectDemoNight.Migrations
                     b.HasKey("CategoryId");
 
                     b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("ResumeProjectDemoNight.Entities.Certificate", b =>
+                {
+                    b.Property<int>("CertificateId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CertificateId"));
+
+                    b.Property<string>("Date")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsOngoing")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Organization")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CertificateId");
+
+                    b.ToTable("Certificates");
+                });
+
+            modelBuilder.Entity("ResumeProjectDemoNight.Entities.Education", b =>
+                {
+                    b.Property<int>("EducationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EducationId"));
+
+                    b.Property<string>("Date")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Department")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SchoolName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("EducationId");
+
+                    b.ToTable("Educations");
                 });
 
             modelBuilder.Entity("ResumeProjectDemoNight.Entities.Experience", b =>
@@ -136,6 +194,9 @@ namespace ResumeProjectDemoNight.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PortfolioId"));
 
+                    b.Property<int?>("CategoryId")
+                        .HasColumnType("int");
+
                     b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -148,6 +209,8 @@ namespace ResumeProjectDemoNight.Migrations
                         .HasColumnType("bit");
 
                     b.HasKey("PortfolioId");
+
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("Portfolios");
                 });
@@ -177,6 +240,85 @@ namespace ResumeProjectDemoNight.Migrations
                     b.ToTable("Services");
                 });
 
+            modelBuilder.Entity("ResumeProjectDemoNight.Entities.Skill", b =>
+                {
+                    b.Property<int>("SkillId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SkillId"));
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Value")
+                        .HasColumnType("int");
+
+                    b.HasKey("SkillId");
+
+                    b.ToTable("Skills");
+                });
+
+            modelBuilder.Entity("ResumeProjectDemoNight.Entities.SocialMedia", b =>
+                {
+                    b.Property<int>("SocialMediaId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SocialMediaId"));
+
+                    b.Property<string>("Icon")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("SocialMediaId");
+
+                    b.ToTable("SocialMedias");
+                });
+
+            modelBuilder.Entity("ResumeProjectDemoNight.Entities.Statistic", b =>
+                {
+                    b.Property<int>("StatisticId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StatisticId"));
+
+                    b.Property<string>("Icon")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("StatisticId");
+
+                    b.ToTable("Statistics");
+                });
+
             modelBuilder.Entity("ResumeProjectDemoNight.Entities.Testimonial", b =>
                 {
                     b.Property<int>("TestimonialId")
@@ -204,6 +346,20 @@ namespace ResumeProjectDemoNight.Migrations
                     b.HasKey("TestimonialId");
 
                     b.ToTable("Testimonials");
+                });
+
+            modelBuilder.Entity("ResumeProjectDemoNight.Entities.Portfolio", b =>
+                {
+                    b.HasOne("ResumeProjectDemoNight.Entities.Category", "Category")
+                        .WithMany("Portfolios")
+                        .HasForeignKey("CategoryId");
+
+                    b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("ResumeProjectDemoNight.Entities.Category", b =>
+                {
+                    b.Navigation("Portfolios");
                 });
 #pragma warning restore 612, 618
         }

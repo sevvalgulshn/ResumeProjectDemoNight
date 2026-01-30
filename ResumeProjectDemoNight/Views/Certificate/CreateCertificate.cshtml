@@ -1,0 +1,77 @@
+﻿@model ResumeProjectDemoNight.Entities.Certificate
+@{
+    ViewData["Title"] = "CreateCertificate";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="flex-1 overflow-y-auto p-8">
+    <div class="max-w-4xl mx-auto space-y-8">
+
+        <div class="flex items-center justify-between">
+            <div>
+                <h3 class="text-2xl font-bold text-white">Yeni Sertifika Ekle</h3>
+                <p class="text-slate-400 text-sm mt-1">Sertifika bilgilerini girin</p>
+            </div>
+            <a href="/Certificate/CertificateList/"
+               class="flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-white px-5 py-2.5 rounded-lg font-bold text-sm transition-all">
+                <span class="material-symbols-outlined text-white" style="color:white;font-size:20px;">arrow_back</span>
+                Listeye Dön
+            </a>
+        </div>
+
+        <div class="bg-card-dark rounded-xl border border-slate-800 overflow-hidden shadow-2xl">
+            <form method="post" class="p-8 space-y-6">
+
+                <div class="space-y-2">
+                    <label class="block text-sm font-semibold text-slate-300">Başlık *</label>
+                    <input asp-for="Title" class="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg text-white"
+                           placeholder="Örn: Google Data Analytics" required />
+                </div>
+
+                <div class="space-y-2">
+                    <label class="block text-sm font-semibold text-slate-300">Kurum (opsiyonel)</label>
+                    <input asp-for="Organization" class="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg text-white"
+                           placeholder="Örn: Coursera" />
+                </div>
+
+                <div class="space-y-2">
+                    <label class="block text-sm font-semibold text-slate-300">Tarih *</label>
+                    <input asp-for="Date" class="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg text-white"
+                           placeholder="Örn: 2026 - Devam" required />
+                </div>
+
+                <div class="space-y-2">
+                    <label class="block text-sm font-semibold text-slate-300">Açıklama (opsiyonel)</label>
+                    <textarea asp-for="Description" rows="4"
+                              class="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg text-white resize-none"
+                              placeholder="Kısa açıklama..."></textarea>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <label class="flex items-center gap-3 px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg cursor-pointer">
+                        <input asp-for="IsOngoing" type="checkbox" class="w-4 h-4" />
+                        <span class="text-white font-medium">Devam ediyor</span>
+                    </label>
+
+                    <label class="flex items-center gap-3 px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg cursor-pointer">
+                        <input asp-for="Status" type="checkbox" class="w-4 h-4" checked />
+                        <span class="text-white font-medium">Aktif</span>
+                    </label>
+                </div>
+
+                <div class="flex items-center gap-4 pt-4 border-t border-slate-800">
+                    <button type="submit"
+                            class="bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-lg font-bold text-sm">
+                        Kaydet
+                    </button>
+                    <a href="/Certificate/CertificateList/"
+                       class="bg-slate-800 hover:bg-slate-700 text-white px-6 py-3 rounded-lg font-bold text-sm">
+                        İptal
+                    </a>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+</div>

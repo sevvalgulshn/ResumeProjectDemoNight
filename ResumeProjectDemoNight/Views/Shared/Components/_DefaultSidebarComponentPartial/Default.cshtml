@@ -7,10 +7,11 @@
 				<span></span>
 			</button>
 		</div>
-		<!-- logo image -->
+
+		<!-- logo text -->
 		<div class="site-logo">
-			<a href="index.html">
-				<img src="/Templates/images/logo.svg" alt="Bolby" />
+			<a href="@Url.Action("Index", "Default")" class="logo-text">
+				<span class="logo-name">Şevval</span><span class="logo-dot">.</span>
 			</a>
 		</div>
 	</div>
@@ -19,10 +20,10 @@
 <!-- desktop header -->
 <header class="desktop-header-1 d-flex align-items-start flex-column">
 
-	<!-- logo image -->
+	<!-- logo text -->
 	<div class="site-logo">
-		<a href="index.html">
-			<img src="/Templates/images/logo.svg" alt="Bolby" />
+		<a href="@Url.Action("Index", "Default")" class="logo-text">
+			<span class="logo-name">ŞGŞ</span><span class="logo-dot">.</span>
 		</a>
 	</div>
 
@@ -40,8 +41,29 @@
 
 	<!-- site footer -->
 	<div class="footer">
-		<!-- copyright text -->
 		<span class="copyright">© @DateTime.Now.Year - Proje1.</span>
 	</div>
 
 </header>
+
+<style>
+	/* Logo görünümü (tema bozulmasın diye mini stil) */
+	.logo-text {
+		text-decoration: none;
+		display: inline-flex;
+		align-items: center;
+		font-weight: 800;
+		font-size: 28px;
+		line-height: 1;
+		color: #fff;
+	}
+
+	.logo-dot {
+		color: #ff4c60;
+		margin-left: 2px;
+	}
+	/* Mobilde biraz küçült */
+	.mobile-header-1 .logo-text {
+		font-size: 24px;
+	}
+</style>

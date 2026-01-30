@@ -1,0 +1,29 @@
+﻿@model List<ResumeProjectDemoNight.Entities.Education>
+
+@functions {
+    private int GetYearFromPeriod(string? period)
+    {
+        if (string.IsNullOrWhiteSpace(period)) return 0;
+        var digits = new string(period.Where(char.IsDigit).ToArray());
+        if (digits.Length >= 4 && int.TryParse(digits.Substring(digits.Length - 4), out int year))
+            return year;
+        return 0;
+    }
+}
+
+<div class="timeline edu bg-white rounded shadow-dark padding-30 overflow-hidden">
+    @foreach (var item in Model
+        .OrderByDescending(x => GetYearFromPeriod(x.Date))
+        .ThenByDescending(x => x.EducationId))
+    {
+        <div class="timeline-container wow fadeInUp">
+            <div class="content">
+                <span class="time">@item.Date</span>
+                <h3 class="title">@item.SchoolName</h3>
+                <h4 class="title">@item.Department</h4>
+            </div>
+        </div>
+    }
+
+    <span class="line"></span>
+</div>

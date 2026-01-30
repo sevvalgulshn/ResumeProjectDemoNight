@@ -1,0 +1,37 @@
+﻿@model List<ResumeProjectDemoNight.Entities.Certificate>
+
+<section id="certificates">
+    <div class="container">
+        <h2 class="section-title wow fadeInUp">Sertifikalar & Eğitimler</h2>
+        <div class="spacer" data-height="60"></div>
+
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-6">
+                    <div class="cert-card shadow-dark rounded">
+                        <div class="cert-line"></div>
+
+                        <div class="cert-head">
+                            <div class="cert-badge @(item.IsOngoing ? "ongoing" : "done")">
+                                @(item.IsOngoing ? "Devam Ediyor" : "Tamamlandı")
+                            </div>
+
+                            <div class="cert-date">
+                                @item.Date
+                            </div>
+                        </div>
+
+                        <h4 class="cert-title">@item.Title</h4>
+                        <div class="cert-org">@item.Organization</div>
+
+                        @if (!string.IsNullOrWhiteSpace(item.Description))
+                        {
+                            <p class="cert-desc">@item.Description</p>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>

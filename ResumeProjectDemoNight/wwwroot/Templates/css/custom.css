@@ -1,0 +1,115 @@
+﻿/* SAĞ KARTI (Education) gerçekten genişlet - max-width / inline-block ez */
+#experience .col-md-6 .timeline.edu {
+    width: 100% !important;
+    max-width: none !important; /* asıl kilit bu */
+    display: block !important; /* inline-block varsa kır */
+    margin: 0 !important; /* auto margin varsa kır */
+    padding: 30px 45px !important; /* yatay geniş his */
+    box-sizing: border-box !important;
+}
+
+    /* İçerik tam genişlik */
+    #experience .col-md-6 .timeline.edu .timeline-container,
+    #experience .col-md-6 .timeline.edu .content {
+        width: 100% !important;
+        max-width: none !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Dikey boşluğu azalt */
+    #experience .col-md-6 .timeline.edu .timeline-container {
+        margin-bottom: 18px !important;
+        padding-left: 45px !important; /* icon/line boşluğu (50 çoktu) */
+    }
+
+    /* Üniversite adı tek satır kalsın (Atılım Üniversitesi yan yana) */
+    #experience .col-md-6 .timeline.edu h3.title,
+    #experience .col-md-6 .timeline.edu h4.title {
+        white-space: nowrap !important;
+    }
+
+    /* Fontları makul yap (senin 900px/96px uçmuş) */
+    #experience .col-md-6 .timeline.edu h3.title {
+        font-size: 20px !important;
+        line-height: 1.2 !important;
+        margin: 0 0 6px 0 !important;
+    }
+
+    #experience .col-md-6 .timeline.edu h4.title {
+        font-size: 16px !important;
+        line-height: 1.2 !important;
+        margin: 0 !important;
+    }
+    #experience .col-md-6 .timeline.edu h3.title {
+        overflow: visible !important;
+        text-overflow: clip !important;
+    }
+/* ===============================
+   CERTIFICATES (Sertifikalar)
+================================ */
+
+#certificates .cert-card {
+    position: relative;
+    padding: 26px 24px 22px 40px;
+    background: #fff;
+    margin-bottom: 22px;
+    border-radius: 16px;
+}
+
+#certificates .cert-line {
+    position: absolute;
+    left: 18px;
+    top: 18px;
+    bottom: 18px;
+    width: 3px;
+    background: #ff4c60;
+    border-radius: 8px;
+}
+
+#certificates .cert-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    gap: 10px;
+}
+
+#certificates .cert-badge {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 10px;
+    border-radius: 999px;
+}
+
+    #certificates .cert-badge.ongoing {
+        background: rgba(255, 76, 96, .12);
+        color: #ff4c60;
+    }
+
+    #certificates .cert-badge.done {
+        background: rgba(0, 200, 83, .12);
+        color: #00a152;
+    }
+
+#certificates .cert-date {
+    font-size: 12px;
+    color: #8b8b8b;
+}
+
+#certificates .cert-title {
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+
+#certificates .cert-org {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+#certificates .cert-desc {
+    font-size: 14px;
+    color: #666;
+}
+
+

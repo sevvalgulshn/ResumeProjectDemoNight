@@ -1,0 +1,78 @@
+﻿@model List<ResumeProjectDemoNight.Entities.Certificate>
+@{
+    ViewData["Title"] = "Sertifikalar";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+}
+
+<div class="p-8">
+    <div class="flex items-center justify-between mb-6">
+        <div>
+            <h3 class="text-2xl font-bold text-white">Sertifikalar</h3>
+            <p class="text-slate-400 text-sm mt-1">Sertifika / eğitim kayıtlarını yönetin</p>
+        </div>
+
+        <a href="/Certificate/CreateCertificate"
+           class="bg-primary hover:bg-primary/90 text-white px-5 py-2.5 rounded-lg font-bold text-sm transition-all">
+            + Yeni Ekle
+        </a>
+    </div>
+
+    <div class="bg-card-dark rounded-xl border border-slate-800 overflow-hidden shadow-2xl">
+        <div class="overflow-x-auto">
+            <table class="w-full text-left">
+                <thead class="bg-slate-900/40 border-b border-slate-800">
+                    <tr>
+                        <th class="p-4 text-slate-300 text-sm font-semibold">Başlık</th>
+                        <th class="p-4 text-slate-300 text-sm font-semibold">Kurum</th>
+                        <th class="p-4 text-slate-300 text-sm font-semibold">Tarih</th>
+                        <th class="p-4 text-slate-300 text-sm font-semibold">Devam</th>
+                        <th class="p-4 text-slate-300 text-sm font-semibold">Durum</th>
+                        <th class="p-4 text-slate-300 text-sm font-semibold w-40">İşlem</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr class="border-b border-slate-800 hover:bg-slate-900/30 transition">
+                            <td class="p-4 text-white font-semibold">@item.Title</td>
+                            <td class="p-4 text-slate-300">@(item.Organization ?? "-")</td>
+                            <td class="p-4 text-slate-300">@item.Date</td>
+                            <td class="p-4">
+                                @if (item.IsOngoing)
+                                {
+                                    <span class="text-xs font-bold px-2 py-1 rounded bg-blue-500/20 text-blue-300">Devam</span>
+                                }
+                                else
+                                {
+                                    <span class="text-xs font-bold px-2 py-1 rounded bg-slate-700/40 text-slate-300">Bitti</span>
+                                }
+                            </td>
+                            <td class="p-4">
+                                @if (item.Status)
+                                {
+                                    <span class="text-xs font-bold px-2 py-1 rounded bg-emerald-500/20 text-emerald-300">Aktif</span>
+                                }
+                                else
+                                {
+                                    <span class="text-xs font-bold px-2 py-1 rounded bg-red-500/20 text-red-300">Pasif</span>
+                                }
+                            </td>
+                            <td class="p-4 flex gap-2">
+                                <a href="/Certificate/UpdateCertificate/@item.CertificateId"
+                                   class="px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold">
+                                    Güncelle
+                                </a>
+                                <a href="/Certificate/DeleteCertificate/@item.CertificateId"
+                                   onclick="return confirm('Silmek istediğine emin misin?')"
+                                   class="px-3 py-2 rounded-lg bg-red-600/80 hover:bg-red-600 text-white text-xs font-bold">
+                                    Sil
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
